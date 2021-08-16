@@ -2,7 +2,7 @@ const SiteFooter = () => {
   return (
     <footer>
       <div className="footer-container">
-        &copy; theScore {new Date().getFullYear()}
+        &copy; Transportly {new Date().getFullYear()}
       </div>
     </footer>
   );

@@ -5,13 +5,13 @@
 // @import "../views/NFL/rushing.view";
 
 // Components
-// @import "../components/SiteHeader/siteHeader.component";
+@import "../components/SiteHeader/siteHeader.component";
 // @import "../components/SiteNav/siteNav.component";
 // @import "../components/SiteSubNav/siteSubNav.component";
 // @import "../components/Spinner/spinner.component";
 // @import "../components/Filters/filters.component";
 // @import "../components/Pagination/pagination.component";
-// @import "../components/SiteFooter/siteFooter.component";
+@import "../components/SiteFooter/siteFooter.component";
 
 .App {
   display: flex;
