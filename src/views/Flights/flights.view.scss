@@ -1,0 +1,39 @@
+.flights {
+  table {
+    border-collapse: collapse;
+    font-size: $size-12;
+    overflow: hidden;
+    margin: 0 0 1rem;
+    position: relative;
+    width: 100%;
+
+    thead {
+      th {
+        padding: 4px 8px;
+        text-align: left;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+
+    tbody {
+      tr {
+        border-top: 1px solid rgba(13, 36, 60, 0.25);
+        border-bottom: 1px solid rgba(13, 36, 60, 0.25);
+
+        &:nth-of-type(odd) {
+          background-color: $table-row;
+        }
+
+        td {
+          padding: 6px 10px;
+
+          &.selectedColumn {
+            background-color: $selected-column;
+          }
+        }
+      }
+    }
+  }
+}
