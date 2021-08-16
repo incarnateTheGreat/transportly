@@ -5,10 +5,6 @@ export const groupBy = (arr, property) => {
   }, {});
 };
 
-export const handleNavClick = (path, history) => () => {
-  history.push(path);
-};
-
 // Create URL Params.
 export const encodeQueryData = (objectToParse) => {
   const params = [];

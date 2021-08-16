@@ -1,7 +1,9 @@
+// import { withRouter } from "react-router-dom";
 import useFlights from "hooks/useFlights";
 import Spinner from "components/Spinner/spinner.component";
+// import { handleNavClick } from "utils/utils";
 
-const Flights = () => {
+const Flights = ({ history }) => {
   const repoName = "flightRepo";
   const { isLoading, data } = useFlights(repoName);
 
@@ -12,7 +14,17 @@ const Flights = () => {
       {isLoading && <Spinner position="floatCenter" />}
 
       {!isLoading && Object.keys(data).length > 0 && (
-        <>
+        <div>
+          <button
+            className="border"
+            type="button"
+            title="VIEW ORDER SCHEDULE"
+            onClick={() => {
+              history.push("/orders");
+            }}
+          >
+            VIEW ORDER SCHEDULE
+          </button>
           {Object.keys(data).map((day, tableKey) => {
             return (
               <table key={tableKey}>
@@ -49,10 +61,11 @@ const Flights = () => {
               </table>
             );
           })}
-        </>
+        </div>
       )}
     </div>
   );
 };
 
+// export default withRouter(Flights);
 export default Flights;

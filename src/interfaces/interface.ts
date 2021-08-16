@@ -1,4 +1,4 @@
-// import { createContext } from "react";
+import { Dispatch, createContext, SetStateAction } from "react";
 
 export interface OrdersData {
   id: string;
@@ -12,8 +12,11 @@ export interface FlightData {
   day: number;
   orders: OrdersData[];
 }
-// export interface ConsentsContextValues {
-//   repoName: string;
-// }
 
-// export const ConsentsContext = createContext({} as ConsentsContextValues);
+export interface TransportlyContextValues {
+  // repoName: string;
+  flightOrderData: FlightData[];
+  setFlightOrderData: Dispatch<SetStateAction<FlightData[]>>;
+}
+
+export const TransportlyContext = createContext({} as TransportlyContextValues);
