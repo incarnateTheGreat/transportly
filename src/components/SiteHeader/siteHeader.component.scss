@@ -1,0 +1,41 @@
+.header {
+  align-items: center;
+  background-color: $base-header-colour;
+  color: $white;
+  display: flex;
+
+  &-container {
+    align-items: center;
+    display: flex;
+    flex-direction: revert;
+    margin: 0 auto;
+    padding: 0 1.5em;
+    width: 80%;
+  }
+
+  &-logo {
+    background: url("../../vectors/thescore-logo.svg") 0 2px no-repeat;
+    background-size: auto 190%;
+    display: block;
+    height: 24px;
+    margin: 0.5rem 0;
+    width: 110px;
+  }
+}
+
+@media only screen and (max-width: $medium) {
+  .header {
+    &-container {
+      margin: unset;
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: $small) {
+  .header {
+    &-container {
+      justify-content: space-between;
+    }
+  }
+}

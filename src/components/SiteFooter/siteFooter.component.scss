@@ -1,0 +1,24 @@
+footer {
+  background: $base-header-colour;
+  color: $white;
+  display: flex;
+
+  .footer-container {
+    align-items: center;
+    flex-direction: revert;
+    display: flex;
+    font-size: $size-12;
+    margin: 0 auto;
+    padding: 1em;
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: $medium) {
+  footer {
+    .footer-container {
+      margin: unset;
+      width: 100%;
+    }
+  }
+}
