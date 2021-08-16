@@ -1,11 +1,11 @@
 // import { RushingData } from "interfaces/interface";
-import { FlightData } from "interfaces/interface";
+// import { FlightData } from "interfaces/interface";
 import { useQuery } from "react-query";
 import { SERVER_URL } from "utils/constants";
 import { groupBy } from "utils/utils";
 
 const useFlights = (repoName) => {
-  return useQuery<FlightData[]>(
+  return useQuery(
     [repoName],
     () => {
       let url = `${SERVER_URL}/flights`;

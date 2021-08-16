@@ -1,4 +1,4 @@
-import {GENERAL} from 'utils/messages';
+import { GENERAL } from "utils/messages";
 interface SpinnerProps {
   size?: string;
   position?: string;

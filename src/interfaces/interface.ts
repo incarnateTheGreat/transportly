@@ -10,6 +10,7 @@ export interface FlightData {
   departure_city: string;
   arrival_city: string;
   day: number;
+  orders: OrdersData[];
 }
 // export interface ConsentsContextValues {
 //   repoName: string;
