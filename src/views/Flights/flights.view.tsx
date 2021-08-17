@@ -48,6 +48,7 @@ const Flights = ({ history }) => {
 
       {!isLoading && Object.keys(flightsBasedOnDays).length > 0 && (
         <div>
+          <h3 className="title">Flights</h3>
           <button
             className="border primary viewOrderSchedule"
             type="button"
@@ -58,9 +59,9 @@ const Flights = ({ history }) => {
           </button>
           {Object.keys(flightsBasedOnDays).map((day, tableKey) => {
             return (
-              <>
-                <h3>Scheduled flights for Day {day}</h3>
-                <table key={tableKey}>
+              <div className="flights-table-container" key={tableKey}>
+                <h4 className="title">Scheduled flights for Day {day}</h4>
+                <table>
                   <thead>
                     <tr>
                       <th>Flight number</th>
@@ -98,7 +99,7 @@ const Flights = ({ history }) => {
                     })}
                   </tbody>
                 </table>
-              </>
+              </div>
             );
           })}
         </div>

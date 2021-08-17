@@ -22,6 +22,7 @@ const Orders = ({ history }) => {
 
   return (
     <div className="orders">
+      <h3 className="title">Orders</h3>
       <button
         className="border primary viewFlightSchedule"
         type="button"

@@ -1,24 +1,30 @@
 .flights {
   .viewOrderSchedule {
-    float: right;
-    margin: 0 0 1em;
+    display: flex;
+    margin-left: auto;
   }
 
-  table {
-    thead {
-      tr {
-        th {
-          &:last-child {
-            float: right;
+  &-table-container {
+    margin: 0 0 1em;
+
+    table {
+      margin: 1em 0;
+
+      thead {
+        tr {
+          th {
+            &:last-child {
+              float: right;
+            }
           }
         }
       }
-    }
-    tbody {
-      tr {
-        td {
-          &:last-child {
-            float: right;
+      tbody {
+        tr {
+          td {
+            &:last-child {
+              float: right;
+            }
           }
         }
       }

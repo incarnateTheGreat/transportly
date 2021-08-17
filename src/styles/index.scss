@@ -16,6 +16,11 @@
   flex-direction: column;
   height: 100vh;
 
+  h3.title {
+    border-bottom: 1px solid #566a80;
+    margin: 0 0 0.5em;
+  }
+
   article {
     margin: 0 auto;
     width: 80%;
@@ -24,44 +29,6 @@
   section {
     flex: 1;
     padding: 1em 0;
-  }
-
-  table {
-    border-collapse: collapse;
-    font-size: $size-12;
-    overflow: hidden;
-    margin: 0 0 1rem;
-    position: relative;
-    width: 100%;
-
-    thead {
-      th {
-        padding: 4px 8px;
-        text-align: left;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-    }
-
-    tbody {
-      tr {
-        border-top: 1px solid rgba(13, 36, 60, 0.25);
-        border-bottom: 1px solid rgba(13, 36, 60, 0.25);
-
-        &:nth-of-type(odd) {
-          background-color: $table-row;
-        }
-
-        td {
-          padding: 6px 10px;
-
-          &.selectedColumn {
-            background-color: $selected-column;
-          }
-        }
-      }
-    }
   }
 }
 

@@ -1,6 +1,10 @@
 .orders {
   .viewFlightSchedule {
-    float: right;
-    margin: 0 0 1em;
+    display: flex;
+    margin-left: auto;
+  }
+
+  table {
+    margin: 1em 0;
   }
 }

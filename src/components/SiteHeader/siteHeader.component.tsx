@@ -12,7 +12,7 @@ const SiteHeader = ({ history }) => {
           <li
             className={assignActivePageClass(
               history.location.pathname,
-              "/flights"
+              "/flights" || "/flight"
             )}
             onClick={() => history.push("/flights")}
           >
