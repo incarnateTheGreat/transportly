@@ -2,15 +2,13 @@
 @import "./_defaults";
 
 // Views
+@import "../views/Flight/flight.view";
 @import "../views/Flights/flights.view";
+@import "../views/Orders/orders.view";
 
 // Components
 @import "../components/SiteHeader/siteHeader.component";
-// @import "../components/SiteNav/siteNav.component";
-// @import "../components/SiteSubNav/siteSubNav.component";
 @import "../components/Spinner/spinner.component";
-// @import "../components/Filters/filters.component";
-// @import "../components/Pagination/pagination.component";
 @import "../components/SiteFooter/siteFooter.component";
 
 .App {
@@ -18,8 +16,14 @@
   flex-direction: column;
   height: 100vh;
 
+  article {
+    margin: 0 auto;
+    width: 80%;
+  }
+
   section {
     flex: 1;
+    padding: 1em 0;
   }
 
   table {
@@ -56,6 +60,19 @@
             background-color: $selected-column;
           }
         }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $medium) {
+  .App {
+    section {
+      padding: 1em;
+
+      article {
+        margin: unset;
+        width: 100%;
       }
     }
   }

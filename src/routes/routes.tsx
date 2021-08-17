@@ -1,11 +1,18 @@
+import Home from "views/Home/home.view";
 import Flights from "views/Flights/flights.view";
 import Flight from "views/Flight/flight.view";
 import Orders from "views/Orders/orders.view";
 
 const routes = [
   {
-    label: "Flights",
+    label: "Home",
     path: "/",
+    component: Home,
+    exact: true,
+  },
+  {
+    label: "Flights",
+    path: "/flights",
     component: Flights,
     exact: true,
   },

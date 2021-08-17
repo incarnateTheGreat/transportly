@@ -1,28 +1,62 @@
 .header {
-  align-items: center;
   background-color: $base-header-colour;
   color: $white;
   display: flex;
+  flex-direction: column;
+
+  nav {
+    align-items: center;
+    background: rgb(22, 75, 132);
+    display: flex;
+    flex-direction: revert;
+    margin: 0 auto;
+    width: 100%;
+
+    ul {
+      align-items: center;
+      display: flex;
+      margin: 0 auto;
+      padding: 0.5em 0;
+      width: 80%;
+
+      li {
+        cursor: pointer;
+        list-style: none;
+        transition: ease-in 50ms;
+        margin: 0 1em 0 0;
+        font-size: 14px;
+
+        &:hover,
+        &.active {
+          color: rgba($link-color-light, 0.7);
+        }
+      }
+    }
+  }
 
   &-container {
     align-items: center;
     display: flex;
     flex-direction: revert;
     margin: 0 auto;
-    padding: 0 1.5em;
+    padding: 1em;
     width: 80%;
-  }
 
-  &-logo {
-    display: block;
-    height: 24px;
-    margin: 0.5rem 0;
-    width: 110px;
+    h2 {
+      cursor: pointer;
+    }
   }
 }
 
 @media only screen and (max-width: $medium) {
   .header {
+    nav {
+      ul {
+        margin: unset;
+        padding: 0.5em 0.5em 0.5em 1em;
+      }
+    }
+
     &-container {
       margin: unset;
       width: 100%;

@@ -63,7 +63,7 @@ button,
     border: 1px solid;
   }
 
-  &-primary {
+  &.primary {
     background-color: $base-header-colour;
     border: 1px solid;
     color: $white;

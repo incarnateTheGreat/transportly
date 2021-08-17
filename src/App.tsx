@@ -6,6 +6,7 @@ import routes from "routes/routes";
 import SiteHeader from "components/SiteHeader/siteHeader.component";
 import SiteFooter from "components/SiteFooter/siteFooter.component";
 import {
+  FlightData,
   TransportlyContext,
   TransportlyContextValues,
 } from "interfaces/interface";
@@ -17,23 +18,38 @@ const history = createBrowserHistory();
 const queryClient = new QueryClient();
 
 const App: React.FC = (): JSX.Element => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [flightOrderData, setFlightOrderData] = useState([]);
+  const [combinedFlightOrderData, setCombinedFlightOrderData] = useState<
+    FlightData[] | null
+  >(null);
 
   const values: TransportlyContextValues = useMemo(
     () => ({
+      isLoading,
+      setIsLoading,
       flightOrderData,
       setFlightOrderData,
+      combinedFlightOrderData,
+      setCombinedFlightOrderData,
     }),
-    [flightOrderData, setFlightOrderData]
+    [
+      isLoading,
+      setIsLoading,
+      flightOrderData,
+      setFlightOrderData,
+      combinedFlightOrderData,
+      setCombinedFlightOrderData,
+    ]
   );
 
   return (
     <TransportlyContext.Provider value={values}>
       <QueryClientProvider client={queryClient}>
-        <div className="App">
-          <SiteHeader />
-          <section>
-            <Router history={history}>
+        <Router history={history}>
+          <div className="App">
+            <SiteHeader />
+            <section>
               <article>
                 <Switch>
                   {routes.map((route, key) => {
@@ -48,10 +64,10 @@ const App: React.FC = (): JSX.Element => {
                   })}
                 </Switch>
               </article>
-            </Router>
-          </section>
-          <SiteFooter />
-        </div>
+            </section>
+            <SiteFooter />
+          </div>
+        </Router>
       </QueryClientProvider>
     </TransportlyContext.Provider>
   );

@@ -1,4 +1,0 @@
-{
-  "/orders/list": "/orders",
-  "/orders/get/:id": "/orders/:id"
-}

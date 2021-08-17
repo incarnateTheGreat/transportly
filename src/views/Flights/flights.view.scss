@@ -1,2 +1,27 @@
 .flights {
+  .viewOrderSchedule {
+    float: right;
+    margin: 0 0 1em;
+  }
+
+  table {
+    thead {
+      tr {
+        th {
+          &:last-child {
+            float: right;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          &:last-child {
+            float: right;
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,64 +1,104 @@
-// import { withRouter } from "react-router-dom";
-import useFlights from "hooks/useFlights";
+import { useEffect, useContext, useState } from "react";
 import Spinner from "components/Spinner/spinner.component";
-// import { handleNavClick } from "utils/utils";
+import { TransportlyContext } from "interfaces/interface";
+import { getCombinedFlightData, getFlightsBasedOnDays } from "utils/utils";
+import { DESTINATIONS } from "utils/constants";
 
 const Flights = ({ history }) => {
-  const repoName = "flightRepo";
-  const { isLoading, data } = useFlights(repoName);
+  const {
+    isLoading,
+    setIsLoading,
+    combinedFlightOrderData,
+    setCombinedFlightOrderData,
+  } = useContext(TransportlyContext);
+  const [flightsBasedOnDays, setFlightsBasedOnDays] = useState({});
 
-  // const viewFlight = (flight_number) => {};
+  // If there's no combined data available, then fetch it.
+  useEffect(() => {
+    if (!combinedFlightOrderData) {
+      setIsLoading(true);
+
+      const getData = async () => {
+        const res = await getCombinedFlightData(DESTINATIONS);
+
+        setCombinedFlightOrderData(res);
+        setIsLoading(false);
+      };
+
+      getData();
+    }
+  }, [
+    isLoading,
+    setIsLoading,
+    combinedFlightOrderData,
+    setCombinedFlightOrderData,
+  ]);
+
+  useEffect(() => {
+    if (combinedFlightOrderData) {
+      const res = getFlightsBasedOnDays(combinedFlightOrderData);
+
+      setFlightsBasedOnDays(res);
+    }
+  }, [combinedFlightOrderData]);
 
   return (
     <div className="flights">
       {isLoading && <Spinner position="floatCenter" />}
 
-      {!isLoading && Object.keys(data).length > 0 && (
+      {!isLoading && Object.keys(flightsBasedOnDays).length > 0 && (
         <div>
           <button
-            className="border"
+            className="border primary viewOrderSchedule"
             type="button"
             title="VIEW ORDER SCHEDULE"
-            onClick={() => {
-              history.push("/orders");
-            }}
+            onClick={() => history.push("/orders")}
           >
             VIEW ORDER SCHEDULE
           </button>
-          {Object.keys(data).map((day, tableKey) => {
+          {Object.keys(flightsBasedOnDays).map((day, tableKey) => {
             return (
-              <table key={tableKey}>
-                <thead>
-                  <tr>
-                    <th>Flight number</th>
-                    <th>Departure</th>
-                    <th>Arrival</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data[day].map((flight, key) => {
-                    const { flight_number, departure_city, arrival_city } =
-                      flight;
+              <>
+                <h3>Scheduled flights for Day {day}</h3>
+                <table key={tableKey}>
+                  <thead>
+                    <tr>
+                      <th>Flight number</th>
+                      <th>Departure</th>
+                      <th>Arrival</th>
+                      <th>View Flight</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {flightsBasedOnDays[day].map((flight, key) => {
+                      const { flight_number, departure_city, arrival_city } =
+                        flight;
 
-                    return (
-                      <tr key={key}>
-                        <td>{flight_number}</td>
-                        <td>{departure_city}</td>
-                        <td>{arrival_city}</td>
-                        <td>
-                          <button
-                            type="button"
-                            className="border"
-                            // onClick={() => viewFlight(flight_number)}
-                          >
-                            View flight
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                      return (
+                        <tr key={key}>
+                          <td>{flight_number}</td>
+                          <td>{departure_city}</td>
+                          <td>{arrival_city}</td>
+                          <td>
+                            <button
+                              type="button"
+                              className="border"
+                              onClick={() =>
+                                history.push({
+                                  pathname: "/flight",
+                                  state: { flight_number },
+                                })
+                              }
+                            >
+                              View flight
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </>
             );
           })}
         </div>
@@ -67,5 +107,4 @@ const Flights = ({ history }) => {
   );
 };
 
-// export default withRouter(Flights);
 export default Flights;

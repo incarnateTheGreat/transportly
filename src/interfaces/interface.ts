@@ -14,9 +14,12 @@ export interface FlightData {
 }
 
 export interface TransportlyContextValues {
-  // repoName: string;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
   flightOrderData: FlightData[];
   setFlightOrderData: Dispatch<SetStateAction<FlightData[]>>;
+  combinedFlightOrderData: FlightData[] | null;
+  setCombinedFlightOrderData: Dispatch<SetStateAction<FlightData[]>>;
 }
 
 export const TransportlyContext = createContext({} as TransportlyContextValues);

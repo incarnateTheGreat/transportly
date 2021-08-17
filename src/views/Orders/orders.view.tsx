@@ -1,66 +1,35 @@
-import { useContext, useEffect, useState } from "react";
-import { FlightData, TransportlyContext } from "interfaces/interface";
-import useOrders from "hooks/useOrders";
-import useFlights from "hooks/useFlights";
+import { TransportlyContext } from "interfaces/interface";
+import { useEffect, useContext } from "react";
+import { DESTINATIONS } from "utils/constants";
+import { getCombinedFlightData } from "utils/utils";
 
-const destinations = ["YYZ", "YVR", "YYC"];
-
-const Orders = () => {
-  const { flightOrderData, setFlightOrderData } =
+const Orders = ({ history }) => {
+  const { combinedFlightOrderData, setCombinedFlightOrderData } =
     useContext(TransportlyContext);
-  const ordersRepoName = "ordersRepo";
-  const flightsRepoName = "flightsRepo";
-  const { isLoading: isOrdersLoading, data: orders } = useOrders(
-    ordersRepoName,
-    destinations
-  );
-  const [combinedOrders, setCombinedOrders] = useState<FlightData[]>([]);
-  const { isLoading: isFlightsLoading, data: flights } =
-    useFlights(flightsRepoName);
 
-  // Create an  merged output with order number and flight info.
+  // If there's no combined data available, then fetch it.
   useEffect(() => {
-    if (flightOrderData.length === 0 && orders && flights) {
-      const objOrders = orders.reduce((acc, curr) => {
-        const key = Object.keys(curr)[0];
+    if (!combinedFlightOrderData) {
+      const getData = async () => {
+        const res = await getCombinedFlightData(DESTINATIONS);
 
-        acc[key] = curr[key];
+        setCombinedFlightOrderData(res);
+      };
 
-        return acc;
-      }, {});
-
-      const flightsWithOrders = { ...flights };
-
-      for (const flight in flightsWithOrders) {
-        for (const arrival of destinations) {
-          const findFlight: FlightData = flightsWithOrders[flight].find(
-            (flight) => {
-              return flight.arrival_city === arrival;
-            }
-          );
-
-          findFlight.orders = objOrders[arrival].splice(0, 20);
-        }
-      }
-
-      setFlightOrderData(flightsWithOrders);
+      getData();
     }
-  }, [orders, flights, flightOrderData, setFlightOrderData]);
-
-  useEffect(() => {
-    if (flightOrderData && !isOrdersLoading && !isFlightsLoading) {
-      const combined = Object.keys(flightOrderData).reduce((acc, curr) => {
-        acc.push(...flightOrderData[curr]);
-
-        return acc;
-      }, []);
-
-      setCombinedOrders(combined);
-    }
-  }, [isFlightsLoading, isOrdersLoading, flightOrderData]);
+  }, [combinedFlightOrderData, setCombinedFlightOrderData]);
 
   return (
-    <div>
+    <div className="orders">
+      <button
+        className="border primary viewFlightSchedule"
+        type="button"
+        title="VIEW FLIGHT SCHEDULE"
+        onClick={() => history.push("/flights")}
+      >
+        VIEW FLIGHT SCHEDULE
+      </button>
       <table>
         <thead>
           <tr>
@@ -72,7 +41,7 @@ const Orders = () => {
           </tr>
         </thead>
         <tbody>
-          {combinedOrders.map((flight) => {
+          {combinedFlightOrderData?.map((flight) => {
             const { day, flight_number, departure_city, arrival_city, orders } =
               flight;
 
